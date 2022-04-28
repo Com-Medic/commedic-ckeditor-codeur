@@ -4,6 +4,7 @@
 
 const path = require( 'path' );
 const { styles } = require( '@ckeditor/ckeditor5-dev-utils' );
+const CKEditorWebpackPlugin = require( '@ckeditor/ckeditor5-dev-webpack-plugin' );
 
 module.exports = {
 
@@ -21,7 +22,7 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /ckeditor5-[^/\\]+[/\\]theme[/\\]icons[/\\][^/\\]+\.svg$/,
+				test: /\.svg$/,
 				use: [ 'raw-loader' ]
 			},
 			{
@@ -57,5 +58,14 @@ module.exports = {
 	devtool: 'source-map',
 
 	// By default webpack logs warnings if the bundle is bigger than 200kb.
-	performance: { hints: false }
+	performance: { hints: false },
+
+	plugins: [
+		new CKEditorWebpackPlugin( {
+			// UI language. Language codes follow the https://en.wikipedia.org/wiki/ISO_639-1 format.
+			// When changing the built-in language, remember to also change it in the editor's configuration (src/ckeditor.js).
+			language: 'fr',
+			additionalLanguages: 'all'
+		} )
+	],
 };

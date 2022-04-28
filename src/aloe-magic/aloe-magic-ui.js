@@ -1,7 +1,12 @@
 
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import {addToolbarToDropdown, createDropdown, SplitButtonView, SwitchButtonView} from "@ckeditor/ckeditor5-ui";
+import imageIcon from './aloe.svg';
+import {
+	addToolbarToDropdown,
+	createDropdown,
+	SplitButtonView,
+	SwitchButtonView
+} from "@ckeditor/ckeditor5-ui";
 
 export default class AloeMagicUI extends Plugin {
 	init() {
@@ -14,13 +19,17 @@ export default class AloeMagicUI extends Plugin {
 					consonant: true
 				},
 				line: {
-					display: true,
-					vowel: true,
-					consonant: true
+					display: false,
+					vowel: false,
+					consonant: false
 				},
 				text: {
 					display: true,
-					color: true
+					color: true,
+					script: true
+				},
+				colors : {
+					color: false
 				}
 			};
 		}
@@ -39,29 +48,42 @@ export default class AloeMagicUI extends Plugin {
 			const dropdownView = createDropdown( locale, SplitButtonView );
 
 			dropdownView.buttonView.set( {
-				// The t() function helps localize the editor. All strings enclosed in t() can be
-				// translated and change when the language of the editor changes.
-				label: t( 'Aloe Magic' ),
-				withText: true,
+				label: 'Codeur',
+				icon:imageIcon,
 				tooltip: true
 			} );
 
 			const buttons = [];
 			const source = [
-				{ filter: 'card', action: 'display', name: 'CARTES' },
-				{ filter: 'card', action: 'consonant', name: '| Consonnes' },
-				{ filter: 'card', action: 'vowel', name: '| Voyelles' },
-				{ filter: 'line', action: 'display', name: 'LIGNES' },
-				{ filter: 'line', action: 'consonant', name: '| Consonnes' },
-				{ filter: 'line', action: 'vowel', name: '| Voyelles' },
-				{ filter: 'text', action: 'display', name: 'TEXTES' },
-				{ filter: 'text', action: 'color', name: '| Couleurs' }
+				{ filter: 'card', action: 'display', name: 'Cartes', title: true },
+				{ filter: 'card', action: 'consonant', name: 'Consonnes', title: false },
+				{ filter: 'card', action: 'vowel', name: 'Voyelles', title: false },
+				{ filter: 'line', action: 'display', name: 'Lignes', title: true },
+				{ filter: 'line', action: 'consonant', name: 'Consonnes', title: false },
+				{ filter: 'line', action: 'vowel', name: 'Voyelles', title: false },
+				{ filter: 'text', action: 'display', name: 'Textes', title: true },
+				{ filter: 'text', action: 'color', name: 'Couleurs', title: false },
+				{ filter: 'text', action: 'script', name: 'Script', title: false },
+				{ filter: 'colors', action: 'color', name: 'Monochromie', title: true }
 			];
 
+			let i = 0;
+
 			source.forEach( item => {
+				let btnClass = 'custom-toggle';
+				if(item.title){
+					btnClass += ' title';
+				}else{
+					btnClass += ' subtitle';
+				}
+				if(i !== 0 && item.title){
+					btnClass += ' separator';
+				}
+
 				const button = new SwitchButtonView();
 				button.set( {
 					label: item.name,
+					class: btnClass,
 					tooltip: false,
 					withText: true,
 					isToggleable: true,
@@ -75,6 +97,7 @@ export default class AloeMagicUI extends Plugin {
 					event.source.isOn = newValue;
 				} );
 				buttons.push( button );
+				i++;
 			} );
 
 			addToolbarToDropdown( dropdownView, buttons );

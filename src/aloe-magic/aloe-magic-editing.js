@@ -23,7 +23,7 @@ export default class AloeMagicEditing extends Plugin {
 			isObject: true,
 			isBlock: true,
 			allowWhere: '$block',
-			allowContentOf: '$block',
+			allowContentOf: '$root',
 			allowAttributes: [ 'class', 'data-json', 'contenteditable', 'id', 'data-filters' ],
 		} );
 	}

@@ -24,8 +24,8 @@ export default class InsertAloeMagicCommand extends Command {
 			}).then((response) => {
 				this.editor.model.change(writer => {
 					let aloeMagic = "";
-					const filters = JSON.stringify(JSON.parse(localStorage.getItem('filters')));
-					const filtersJson = window.btoa(unescape(encodeURIComponent(filters)))
+					const filters = JSON.parse(localStorage.getItem('filters'));
+					const filtersJson = window.btoa(unescape(encodeURIComponent(JSON.stringify(filters))));
 					const id = uuidv4();
 					const data = JSON.stringify(response.data);
 					const dataJson = window.btoa(unescape(encodeURIComponent(data)));
@@ -35,7 +35,57 @@ export default class InsertAloeMagicCommand extends Command {
 						'data-filters': filtersJson,
 						contenteditable: false
 					});
-					writer.appendText(text, aloeMagic);
+					const textView = writer.createElement('paragraph')
+					writer.appendText(text, textView);
+					writer.append(textView, aloeMagic);
+
+					let p;
+					if(filters.card.display){
+						p = writer.createElement('paragraph')
+						writer.appendText('Cartes', p);
+
+						if(filters.card.vowel){
+							writer.appendText(' | Voyelles', p);
+						}
+						if(filters.card.consonant){
+							writer.appendText(' | Consonnes', p);
+						}
+
+						writer.append(p, aloeMagic);
+					}
+
+
+					if(filters.line.display){
+						p = writer.createElement('paragraph')
+						writer.appendText('Lignes', p);
+
+						if(filters.line.vowel){
+							writer.appendText(' | Voyelles', p);
+						}
+						if(filters.line.consonant){
+							writer.appendText(' | Consonnes', p);
+						}
+
+						writer.append(p, aloeMagic);
+					}
+
+					if(filters.text.display){
+						p = writer.createElement('paragraph')
+						writer.appendText('Texte', p);
+
+						if(filters.text.color){
+							writer.appendText(' | Couleurs', p);
+						}
+						if(filters.text.script){
+							writer.appendText(' | Script', p);
+						}
+						if(!filters.text.script){
+							writer.appendText(' | Cursif', p);
+						}
+
+						writer.append(p, aloeMagic);
+					}
+
 					this.editor.model.insertContent(aloeMagic);
 				});
 			}).catch(err => {

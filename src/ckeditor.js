@@ -27,6 +27,62 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
+const customColorPalette = [
+	{
+		color: 'rgb(0, 0, 0)',
+		label: 'Black'
+	},
+	{
+		color: 'rgb(77, 77, 77)',
+		label: 'Dim grey'
+	},
+	{
+		color: 'rgb(153, 153, 153)',
+		label: 'Grey'
+	},
+	{
+		color: 'rgb(230, 230, 230)',
+		label: 'Light grey'
+	},
+	{
+		color: 'rgb(255, 255, 255)',
+		label: 'White',
+		hasBorder: true
+	},
+	{
+		color: 'rgb(228, 47, 43)',
+		label: 'Red'
+	},
+	{
+		color: 'rgb(248, 235, 37)',
+		label: 'Yellow'
+	},
+	{
+		color: 'rgb(240, 125, 45)',
+		label: 'Orange'
+	},
+	{
+		color: 'rgb(45, 164, 64)',
+		label: 'Green'
+	},
+	{
+		color: 'rgb(66, 155, 204)',
+		label: 'Blue'
+	},
+	{
+		color: 'rgb(239, 132, 174)',
+		label: 'Pink'
+	},
+	{
+		color: 'rgb(226, 177, 141)',
+		label: 'Beige'
+	},
+	{
+		color: 'rgb(145, 104, 160)',
+		label: 'Purple'
+	}
+];
+
 ClassicEditor.builtinPlugins = [
 	Essentials,
 	Paragraph,
@@ -223,7 +279,18 @@ ClassicEditor.defaultConfig = {
 		contentToolbar: [
 			'tableColumn', 'tableRow', 'mergeTableCells',
 			'tableProperties', 'tableCellProperties'
-		]
+		],
+		// Set the palettes for tables.
+		tableProperties: {
+			borderColors: customColorPalette,
+			backgroundColors: customColorPalette
+		},
+
+		// Set the palettes for table cells.
+		tableCellProperties: {
+			borderColors: customColorPalette,
+			backgroundColors: customColorPalette
+		}
 	},
 	image: {
 		styles: [

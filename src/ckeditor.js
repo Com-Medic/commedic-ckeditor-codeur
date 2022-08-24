@@ -29,56 +29,56 @@ export default class ClassicEditor extends ClassicEditorBase {}
 
 const customColorPalette = [
 	{
-		color: 'rgb(0, 0, 0)',
+		color: '#000000',
 		label: 'Black'
 	},
 	{
-		color: 'rgb(77, 77, 77)',
+		color: '#4d4d4d',
 		label: 'Dim grey'
 	},
 	{
-		color: 'rgb(153, 153, 153)',
+		color: '#999999',
 		label: 'Grey'
 	},
 	{
-		color: 'rgb(230, 230, 230)',
+		color: '#e6e6e6',
 		label: 'Light grey'
 	},
 	{
-		color: 'rgb(255, 255, 255)',
+		color: '#ffffff',
 		label: 'White',
 		hasBorder: true
 	},
 	{
-		color: 'rgb(228, 47, 43)',
+		color: '#e42f2b',
 		label: 'Red'
 	},
 	{
-		color: 'rgb(248, 235, 37)',
+		color: '#f8eb25',
 		label: 'Yellow'
 	},
 	{
-		color: 'rgb(240, 125, 45)',
+		color: '#f07d2d',
 		label: 'Orange'
 	},
 	{
-		color: 'rgb(45, 164, 64)',
+		color: '#2da440',
 		label: 'Green'
 	},
 	{
-		color: 'rgb(66, 155, 204)',
+		color: '#429bcc',
 		label: 'Blue'
 	},
 	{
-		color: 'rgb(239, 132, 174)',
+		color: '#ef84ae',
 		label: 'Pink'
 	},
 	{
-		color: 'rgb(226, 177, 141)',
+		color: '#e2b18d',
 		label: 'Beige'
 	},
 	{
-		color: 'rgb(145, 104, 160)',
+		color: '#9168a0',
 		label: 'Purple'
 	}
 ];

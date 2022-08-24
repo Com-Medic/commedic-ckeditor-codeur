@@ -32,6 +32,7 @@ export default class AloeMagicUI extends Plugin {
 					color: false
 				}
 			};
+			localStorage.setItem( 'filters', JSON.stringify( filters ) );
 		}
 
 		const editor = this.editor;

@@ -5,13 +5,19 @@ import params from "./params";
 
 export default class InsertAloeMagicCommand extends Command {
 
+	cardFilterTitle = '• Filtre Cartes activé';
+	lineFilterTitle = '• Filtre Ligne activé'
+	textFilterTitle = '• Filtre Texte activé';
+
 	execute() {
 		const selection = this.editor.model.document.selection;
 		const range = selection.getFirstRange();
 		let text = '';
 		for ( const item of range.getItems() ) {
-			if ( item.is( 'textProxy' ) ) {
-				text += item.data + ' ';
+			if ( item.is( 'textProxy' )) {
+				if(!item.data.includes(this.cardFilterTitle) && !item.data.includes(this.lineFilterTitle) && !item.data.includes(this.textFilterTitle)){
+					text += item.data + ' ';
+				}
 			}
 		}
 		text = text.slice( 0, -1 );
@@ -42,7 +48,7 @@ export default class InsertAloeMagicCommand extends Command {
 					let p;
 					if(filters.card.display){
 						p = writer.createElement('paragraph')
-						writer.appendText('Cartes', p);
+						writer.appendText(this.cardFilterTitle, p);
 
 						if(filters.card.vowel){
 							writer.appendText(' | Voyelles', p);
@@ -57,7 +63,7 @@ export default class InsertAloeMagicCommand extends Command {
 
 					if(filters.line.display){
 						p = writer.createElement('paragraph')
-						writer.appendText('Lignes', p);
+						writer.appendText(this.lineFilterTitle, p);
 
 						if(filters.line.vowel){
 							writer.appendText(' | Voyelles', p);
@@ -71,7 +77,7 @@ export default class InsertAloeMagicCommand extends Command {
 
 					if(filters.text.display){
 						p = writer.createElement('paragraph')
-						writer.appendText('Texte', p);
+						writer.appendText(this.textFilterTitle, p);
 
 						if(filters.text.color){
 							writer.appendText(' | Couleurs', p);

@@ -116,6 +116,7 @@ ClassicEditor.defaultConfig = {
 		items: [
 			'undo','redo', '|',
 			'aloeMagic', 'heading', '|',
+			'LireCouleurFormat', '|',
 			'fontSize', 'fontFamily', '|',
 			'bold', 'italic', 'underline','|',
 			'fontColor', 'fontBackgroundColor', 'insertTable', '|',

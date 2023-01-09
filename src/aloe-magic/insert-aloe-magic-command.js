@@ -93,7 +93,7 @@ export default class InsertAloeMagicCommand extends Command {
 
 						writer.append(p, aloeMagic);
 					}
-					this.editor.model.insertContent(aloeMagic,  editor.model.document.selection.getFirstPosition() );
+					this.editor.model.insertContent(aloeMagic,  this.editor.model.document.selection.getFirstPosition() );
 				});
 			}).catch(err => {
 				console.error(err);

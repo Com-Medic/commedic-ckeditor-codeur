@@ -285,6 +285,7 @@ export default class InsertAloeMagicCommand extends Command {
 	filterText(text) {
 		text = text.replace('(','');
 		text = text.replace(')','');
+		text = text.replace('/','');
 		return text;
 	}
 }

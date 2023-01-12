@@ -294,7 +294,7 @@ export default class InsertAloeMagicCommand extends Command {
 
 		// Replacement with whitespace
 		const charToReplaceWithspace = ['/']
-		charToReplace.forEach(char => {
+		charToReplaceWithspace.forEach(char => {
 			text = text.replace(char,' ');
 		})
 

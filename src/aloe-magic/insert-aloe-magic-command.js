@@ -22,6 +22,7 @@ export default class InsertAloeMagicCommand extends Command {
 				}
 			}
 		}
+		// console.log(textArray);
 		for await (let textArrayItem of textArray){
 			// textArrayItem = textArrayItem.slice( 0, -1 );
 			if(textArrayItem.charAt(0) === ' '){

@@ -37,7 +37,6 @@ export default class InsertAloeMagicCommand extends Command {
 			splitTextArrayItem[splitTextArrayItem.length] = textArrayItem;
 			for await (let text of splitTextArrayItem){
 				if(text !== ''){
-					console.log(text);
 					let filteredText = this.filterText(text);
 					await axios.get(params.endpoint, {
 						params: { text : filteredText },
@@ -50,7 +49,7 @@ export default class InsertAloeMagicCommand extends Command {
 							const id = uuidv4();
 							const data = JSON.stringify(response.data);
 							const dataJson = window.btoa(unescape(encodeURIComponent(data)));
-							console.log(response.data.sentence.source = text);
+							response.data.sentence.source = text;
 							aloeMagic = writer.createElement('aloeMagic', {
 								id: id,
 								'data-json': dataJson,

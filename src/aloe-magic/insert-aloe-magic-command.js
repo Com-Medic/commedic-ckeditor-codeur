@@ -24,6 +24,9 @@ export default class InsertAloeMagicCommand extends Command {
 		}
 		for await (let textArrayItem of textArray){
 			// textArrayItem = textArrayItem.slice( 0, -1 );
+			if(textArrayItem.charAt(0) === ' '){
+				textArrayItem = textArrayItem.substring(1, textArrayItem.length);
+			}
 			textArrayItem = textArrayItem.replace( /[\n\r]/g, ' ' );
 			textArrayItem = textArrayItem.replace( '’', '\'' );
 			let splitTextArrayItem = textArrayItem.match(/[^\.!\?]+[\.!\?]+/g);
@@ -283,9 +286,19 @@ export default class InsertAloeMagicCommand extends Command {
 	}
 
 	filterText(text) {
-		text = text.replace('(','');
-		text = text.replace(')','');
-		text = text.replace('/','');
+		// Simple replacement
+		const charToReplace = ['(',')','«','»']
+		charToReplace.forEach(char => {
+			text = text.replace(char,'');
+		})
+
+		// Replacement with whitespace
+		const charToReplaceWithspace = ['/']
+		charToReplace.forEach(char => {
+			text = text.replace(char,' ');
+		})
+
+		text = text.replace('  ',' ');
 		return text;
 	}
 }

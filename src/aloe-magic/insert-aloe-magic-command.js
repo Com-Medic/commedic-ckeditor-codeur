@@ -45,72 +45,75 @@ export default class InsertAloeMagicCommand extends Command {
 						params: { text : filteredText },
 						headers: {'Content-Type': 'application/json'}
 					}).then((response) => {
-						this.editor.model.change(writer => {
-							let aloeMagic = "";
-							const filters = JSON.parse(localStorage.getItem('filters'));
-							const filtersJson = window.btoa(unescape(encodeURIComponent(JSON.stringify(filters))));
-							const id = uuidv4();
-							response.data.sentence.source = text;
-							const data = JSON.stringify(response.data);
-							const dataJson = window.btoa(unescape(encodeURIComponent(data)));
-							aloeMagic = writer.createElement('aloeMagic', {
-								id: id,
-								'data-json': dataJson,
-								'data-filters': filtersJson,
-								contenteditable: false
+						console.log(response);
+						if(response.data){
+							this.editor.model.change(writer => {
+								let aloeMagic = "";
+								const filters = JSON.parse(localStorage.getItem('filters'));
+								const filtersJson = window.btoa(unescape(encodeURIComponent(JSON.stringify(filters))));
+								const id = uuidv4();
+								response.data.sentence.source = text;
+								const data = JSON.stringify(response.data);
+								const dataJson = window.btoa(unescape(encodeURIComponent(data)));
+								aloeMagic = writer.createElement('aloeMagic', {
+									id: id,
+									'data-json': dataJson,
+									'data-filters': filtersJson,
+									contenteditable: false
+								});
+								const textView = writer.createElement('paragraph')
+								writer.appendText(text, textView);
+								writer.append(textView, aloeMagic);
+
+								let p;
+								if(filters.card.display){
+									p = writer.createElement('paragraph')
+									writer.appendText(this.cardFilterTitle, p);
+
+									if(filters.card.vowel){
+										writer.appendText(' | Voyelles', p);
+									}
+									if(filters.card.consonant){
+										writer.appendText(' | Consonnes', p);
+									}
+
+									writer.append(p, aloeMagic);
+								}
+
+
+								if(filters.line.display){
+									p = writer.createElement('paragraph')
+									writer.appendText(this.lineFilterTitle, p);
+
+									if(filters.line.vowel){
+										writer.appendText(' | Voyelles', p);
+									}
+									if(filters.line.consonant){
+										writer.appendText(' | Consonnes', p);
+									}
+
+									writer.append(p, aloeMagic);
+								}
+
+								if(filters.text.display){
+									p = writer.createElement('paragraph')
+									writer.appendText(this.textFilterTitle, p);
+
+									if(filters.text.color){
+										writer.appendText(' | Couleurs', p);
+									}
+									if(filters.text.script){
+										writer.appendText(' | Script', p);
+									}
+									if(!filters.text.script){
+										writer.appendText(' | Cursif', p);
+									}
+
+									writer.append(p, aloeMagic);
+								}
+								this.editor.model.insertContent(aloeMagic,  this.editor.model.document.selection.getFirstPosition() );
 							});
-							const textView = writer.createElement('paragraph')
-							writer.appendText(text, textView);
-							writer.append(textView, aloeMagic);
-
-							let p;
-							if(filters.card.display){
-								p = writer.createElement('paragraph')
-								writer.appendText(this.cardFilterTitle, p);
-
-								if(filters.card.vowel){
-									writer.appendText(' | Voyelles', p);
-								}
-								if(filters.card.consonant){
-									writer.appendText(' | Consonnes', p);
-								}
-
-								writer.append(p, aloeMagic);
-							}
-
-
-							if(filters.line.display){
-								p = writer.createElement('paragraph')
-								writer.appendText(this.lineFilterTitle, p);
-
-								if(filters.line.vowel){
-									writer.appendText(' | Voyelles', p);
-								}
-								if(filters.line.consonant){
-									writer.appendText(' | Consonnes', p);
-								}
-
-								writer.append(p, aloeMagic);
-							}
-
-							if(filters.text.display){
-								p = writer.createElement('paragraph')
-								writer.appendText(this.textFilterTitle, p);
-
-								if(filters.text.color){
-									writer.appendText(' | Couleurs', p);
-								}
-								if(filters.text.script){
-									writer.appendText(' | Script', p);
-								}
-								if(!filters.text.script){
-									writer.appendText(' | Cursif', p);
-								}
-
-								writer.append(p, aloeMagic);
-							}
-							this.editor.model.insertContent(aloeMagic,  this.editor.model.document.selection.getFirstPosition() );
-						});
+						}
 					}).catch(err => {
 						console.error(err);
 					});
@@ -287,7 +290,7 @@ export default class InsertAloeMagicCommand extends Command {
 
 	filterText(text) {
 		// Simple replacement
-		const charToReplace = ['(',')','«','»', '0','1','2','3','4','5','6','7','8','9']
+		const charToReplace = ['(',')','[',']','«','»', '0','1','2','3','4','5','6','7','8','9']
 		charToReplace.forEach(char => {
 			text = text.replace(char,'');
 		})

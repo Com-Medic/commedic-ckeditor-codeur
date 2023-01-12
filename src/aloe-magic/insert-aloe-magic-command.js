@@ -37,8 +37,10 @@ export default class InsertAloeMagicCommand extends Command {
 			splitTextArrayItem[splitTextArrayItem.length] = textArrayItem;
 			for await (let text of splitTextArrayItem){
 				if(text !== ''){
+					console.log(text);
+					let filteredText = this.filterText(text);
 					await axios.get(params.endpoint, {
-						params: { text },
+						params: { text : filteredText },
 						headers: {'Content-Type': 'application/json'}
 					}).then((response) => {
 						this.editor.model.change(writer => {
@@ -48,6 +50,7 @@ export default class InsertAloeMagicCommand extends Command {
 							const id = uuidv4();
 							const data = JSON.stringify(response.data);
 							const dataJson = window.btoa(unescape(encodeURIComponent(data)));
+							console.log(response.data.sentence.source = text);
 							aloeMagic = writer.createElement('aloeMagic', {
 								id: id,
 								'data-json': dataJson,
@@ -278,5 +281,11 @@ export default class InsertAloeMagicCommand extends Command {
 		const allowedIn = model.schema.findAllowedParent( selection.getFirstPosition(), 'aloeMagic' );
 
 		this.isEnabled = allowedIn !== null;
+	}
+
+	filterText(text) {
+		text = text.replace('(','');
+		text = text.replace(')','');
+		return text;
 	}
 }

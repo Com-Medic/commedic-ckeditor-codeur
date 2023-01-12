@@ -47,9 +47,9 @@ export default class InsertAloeMagicCommand extends Command {
 							const filters = JSON.parse(localStorage.getItem('filters'));
 							const filtersJson = window.btoa(unescape(encodeURIComponent(JSON.stringify(filters))));
 							const id = uuidv4();
+							response.data.sentence.source = text;
 							const data = JSON.stringify(response.data);
 							const dataJson = window.btoa(unescape(encodeURIComponent(data)));
-							response.data.sentence.source = text;
 							aloeMagic = writer.createElement('aloeMagic', {
 								id: id,
 								'data-json': dataJson,

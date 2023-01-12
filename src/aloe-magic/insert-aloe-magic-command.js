@@ -45,8 +45,7 @@ export default class InsertAloeMagicCommand extends Command {
 						params: { text : filteredText },
 						headers: {'Content-Type': 'application/json'}
 					}).then((response) => {
-						console.log(response);
-						if(response.data){
+						if(response.data.sentence){
 							this.editor.model.change(writer => {
 								let aloeMagic = "";
 								const filters = JSON.parse(localStorage.getItem('filters'));

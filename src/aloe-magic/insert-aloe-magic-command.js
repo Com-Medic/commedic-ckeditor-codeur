@@ -22,7 +22,6 @@ export default class InsertAloeMagicCommand extends Command {
 				}
 			}
 		}
-		console.log(textArray);
 		for await (let textArrayItem of textArray){
 			// textArrayItem = textArrayItem.slice( 0, -1 );
 			if(textArrayItem.charAt(0) === ' '){
@@ -288,7 +287,7 @@ export default class InsertAloeMagicCommand extends Command {
 
 	filterText(text) {
 		// Simple replacement
-		const charToReplace = ['(',')','«','»']
+		const charToReplace = ['(',')','«','»', '0','1','2','3','4','5','6','7','8','9']
 		charToReplace.forEach(char => {
 			text = text.replace(char,'');
 		})

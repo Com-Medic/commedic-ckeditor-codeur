@@ -289,13 +289,13 @@ export default class InsertAloeMagicCommand extends Command {
 
 	filterText(text) {
 		// Simple replacement
-		const charToReplace = ['(',')','[',']','«','»', '0','1','2','3','4','5','6','7','8','9']
+		const charToReplace = ['(',')','[',']','«','»', '0','1','2','3','4','5','6','7','8','9', '_', '#', '~', '|', '<', '>', '"', '=', '+', '*', '§', '%', 'µ', '¨', '^', '£', '€', '¤', '@', '{', '}', '²']
 		charToReplace.forEach(char => {
 			text = text.replace(char,'');
 		})
 
 		// Replacement with whitespace
-		const charToReplaceWithspace = ['/']
+		const charToReplaceWithspace = ['/', '\\']
 		charToReplaceWithspace.forEach(char => {
 			text = text.replace(char,' ');
 		})

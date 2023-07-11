@@ -24,6 +24,7 @@ import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
 import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
+import {SourceEditing} from "@ckeditor/ckeditor5-source-editing";
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -86,6 +87,7 @@ const customColorPalette = [
 ClassicEditor.builtinPlugins = [
 	Essentials,
 	Paragraph,
+	SourceEditing,
 	Heading,
 	List,
 	Bold,
@@ -120,7 +122,8 @@ ClassicEditor.defaultConfig = {
 			'fontSize', 'fontFamily', '|',
 			'bold', 'italic', 'underline','|',
 			'fontColor', 'fontBackgroundColor', 'insertTable', '|',
-			'alignment','numberedList', 'bulletedList', 'outdent', 'indent', 'imageUpload' ],
+			'alignment','numberedList', 'bulletedList', 'outdent', 'indent', 'imageUpload', '|',
+			'sourceEditing' ],
 		shouldNotGroupWhenFull: true
 	},
 	fontColor: {

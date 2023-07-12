@@ -40,7 +40,7 @@
     "@ckeditor/ckeditor5-list": "^34.0.1",
     "@ckeditor/ckeditor5-paragraph": "^34.0.0",
     "@ckeditor/ckeditor5-paste-from-office": "^34.0.0",
-    "@ckeditor/ckeditor5-source-editing": "^38.1.1",
+    "@ckeditor/ckeditor5-source-editing": "^34.0.0",
     "@ckeditor/ckeditor5-table": "^34.0.0",
     "@ckeditor/ckeditor5-theme-lark": "^34.0.0",
     "@ckeditor/ckeditor5-ui": "^34.0.0",

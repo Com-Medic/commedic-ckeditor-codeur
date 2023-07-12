@@ -6,7 +6,7 @@ import List from '@ckeditor/ckeditor5-list/src/list';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import AloeMagic from "./aloe-magic/aloe-magic";
-import {Underline} from "@ckeditor/ckeditor5-basic-styles";
+import Underline from "@ckeditor/ckeditor5-basic-styles/src/underline";
 import Font from '@ckeditor/ckeditor5-font/src/font';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
@@ -24,7 +24,7 @@ import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
 import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
-import {SourceEditing} from "@ckeditor/ckeditor5-source-editing";
+import SourceEditing from "@ckeditor/ckeditor5-source-editing/src/sourceediting";
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -122,8 +122,7 @@ ClassicEditor.defaultConfig = {
 			'fontSize', 'fontFamily', '|',
 			'bold', 'italic', 'underline','|',
 			'fontColor', 'fontBackgroundColor', 'insertTable', '|',
-			'alignment','numberedList', 'bulletedList', 'outdent', 'indent', 'imageUpload', '|',
-			'sourceEditing' ],
+			'alignment','numberedList', 'bulletedList', 'outdent', 'indent', 'imageUpload', '|', 'sourceEditing' ],
 		shouldNotGroupWhenFull: true
 	},
 	fontColor: {

@@ -301,6 +301,8 @@ export default class InsertAloeMagicCommand extends Command {
 		})
 
 		text = text.replace('  ',' ');
+		text = text.replace('œ','oe');
+
 		return text;
 	}
 }

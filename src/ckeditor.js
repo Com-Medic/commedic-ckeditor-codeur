@@ -25,6 +25,7 @@ import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
 import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import SourceEditing from "@ckeditor/ckeditor5-source-editing/src/sourceediting";
+import GeneralHtmlSupport from "@ckeditor/ckeditor5-html-support/src/generalhtmlsupport";
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -88,6 +89,7 @@ ClassicEditor.builtinPlugins = [
 	Essentials,
 	Paragraph,
 	SourceEditing,
+	GeneralHtmlSupport,
 	Heading,
 	List,
 	Bold,
@@ -114,11 +116,26 @@ ClassicEditor.builtinPlugins = [
 ]
 
 ClassicEditor.defaultConfig = {
+	htmlSupport: {
+		allow: [
+			{
+				name: 'iframe',
+				attributes: true,
+				classes: true,
+				styles: true
+			},
+			{
+				name: 'div',
+				attributes: true,
+				classes: true,
+				styles: true
+			}
+		]
+	},
 	toolbar: {
 		items: [
 			'undo','redo', '|',
 			'aloeMagic', 'heading', '|',
-			'LireCouleurFormat', '|',
 			'fontSize', 'fontFamily', '|',
 			'bold', 'italic', 'underline','|',
 			'fontColor', 'fontBackgroundColor', 'insertTable', '|',

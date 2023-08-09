@@ -36,7 +36,7 @@ export default class AloeMagicUI extends Plugin {
 		}
 
 		const editor = this.editor;
-		const t = editor.t;
+		// const t = editor.t;
 
 		// The "simpleBox" button must be registered among the UI components of the editor
 		// to be displayed in the toolbar.
@@ -101,8 +101,7 @@ export default class AloeMagicUI extends Plugin {
 				i++;
 			} );
 
-			addToolbarToDropdown( dropdownView, buttons );
-			dropdownView.toolbarView.isVertical = true;
+			addToolbarToDropdown( dropdownView, buttons, { isVertical: true } );
 
 			// Bind the state of the button to the command.
 			dropdownView.bind( 'isOn', 'isEnabled' ).to( command, 'value', 'isEnabled' );
